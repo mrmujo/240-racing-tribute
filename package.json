@@ -1,0 +1,13 @@
+{
+  "name": "240-racing-js",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A JavaScript re-implementation of the 1998 DOS game 240 Racing. Bring your own game files.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

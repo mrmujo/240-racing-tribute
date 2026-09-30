@@ -1,0 +1,5 @@
+# Never upload the original game files or the reverse-engineering notes
+original/
+notes/
+node_modules/
+.DS_Store

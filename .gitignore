@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+# The original game files are copyrighted by their authors; do not commit or deploy them.
+original/
+# Reverse-engineering notes (local only: they quote text and contact details from the original EXE)
+notes/

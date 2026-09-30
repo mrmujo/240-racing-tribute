@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>240 Racing</title>
+<style>
+  :root {
+    --bg: #0b0b0e;
+    --panel: #15151b;
+    --line: #2a2a33;
+    --text: #e7e7ea;
+    --muted: #9a9aa6;
+    --accent: #3a5bff;
+    --ok: #3ccf6e;
+    --bad: #ff5a5a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100%; padding: 16px; }
+  #stage { position: relative; width: min(100%, calc((100vh - 72px) * 4 / 3), 1280px); aspect-ratio: 4 / 3; background: #000; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+  #overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(11,11,14,.92); padding: 16px; }
+  #overlay.hidden { display: none; }
+  .card { width: min(560px, 100%); background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+  h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: .02em; }
+  .sub { color: var(--muted); margin: 0 0 18px; }
+  #drop { display: block; border: 2px dashed var(--line); border-radius: 10px; padding: 22px 16px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+  #drop.over { border-color: var(--accent); background: rgba(58,91,255,.08); }
+  #drop strong { display: block; margin-bottom: 4px; }
+  #drop span { color: var(--muted); font-size: 13px; }
+  ul.files { list-style: none; padding: 0; margin: 14px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 4px 12px; font: 13px ui-monospace, Menlo, monospace; color: var(--muted); }
+  ul.files li.ok { color: var(--ok); }
+  ul.files li.bad { color: var(--bad); }
+  #msg { min-height: 1.4em; margin: 12px 0 0; color: var(--bad); font-size: 13px; }
+  button { font: inherit; border: 0; border-radius: 8px; padding: 10px 18px; background: var(--accent); color: #fff; cursor: pointer; }
+  button.link { background: none; color: var(--muted); padding: 0; text-decoration: underline; font-size: 13px; }
+  .row { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; }
+  footer { margin-top: 10px; color: var(--muted); font-size: 12px; text-align: center; max-width: 960px; }
+  footer a { color: var(--muted); }
+  #start { display: none; }
+  button.big { width: 100%; padding: 14px 18px; font-size: 16px; font-weight: 600; }
+  .hint { color: var(--muted); font-size: 13px; margin: 8px 0 0; text-align: center; }
+  .or { display: flex; align-items: center; gap: 12px; margin: 20px 0 14px; color: var(--muted); font-size: 13px; }
+  .or::before, .or::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="screen" width="320" height="200"></canvas>
+    <div id="overlay">
+      <div class="card" id="loader">
+        <h1>240 Racing</h1>
+        <p class="sub">A JavaScript re-implementation of the 1998 DOS game by Alexander Sandström, Mikael Sjöberg and Lars Andersson.</p>
+        <button id="playFree" class="big" type="button">Play the free edition</button>
+        <p class="hint">New tracks, cars, font and pictures made for this project. Nothing to download.</p>
+        <div class="or"><span>or play the original</span></div>
+        <label id="drop">
+          <input id="pick" type="file" multiple accept=".zip,.exe,.bin,.lev,.dat" hidden>
+          <strong>Drop the game zip or its files here</strong>
+          <span>or click to choose: 240racing.zip, or 240R.EXE, GFX.BIN, 240BURN.BIN, BANA1.LEV, BANA2.LEV</span>
+        </label>
+        <ul class="files" id="list"></ul>
+        <p id="msg"></p>
+        <div class="row">
+          <button class="link" id="forget" type="button" hidden>Forget stored files</button>
+          <button id="start" type="button">Play original</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    Red car: A accelerate, Z brake, X reverse, S/F steer. Yellow car: Ctrl accelerate, Alt brake, ↓ reverse, ←/→ steer.
+    Space race, F1 help, F2 options (players, laps, track, keys), H hiscores, +/− sound, Esc quit.
+    On macOS, Ctrl+arrows may switch desktops; remap the yellow car's keys under F2.
+    Your game files stay in this browser and are never uploaded.
+  </footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
